@@ -1,9 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todolist/models/task_model.dart';
 import 'package:flutter_todolist/screens/add_task_screen.dart';
 import 'package:flutter_todolist/widgets/task_list.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final List<Task> taskList =[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +62,8 @@ class Home extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(20.0),
                           topLeft: Radius.circular(20.0))),
-                  child: TaskList()),
+                  child: TaskList(taskList: taskList,),
+              ),
             ),
           ],
         ),
@@ -67,7 +76,13 @@ class Home extends StatelessWidget {
               backgroundColor: Colors.transparent,
               context: context,
               builder: (context) {
-                return AddTask();
+                return AddTask(
+                    (newTaskName){
+                      setState(() {
+                        taskList.add(Task(taskName: newTaskName));
+                      });
+                    }
+                );
               },
             );
           }),
