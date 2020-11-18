@@ -4,13 +4,7 @@ import 'package:flutter_todolist/models/task_model.dart';
 import 'package:flutter_todolist/screens/add_task_screen.dart';
 import 'package:flutter_todolist/widgets/task_list.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final List<Task> taskList =[];
+class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +56,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(20.0),
                           topLeft: Radius.circular(20.0))),
-                  child: TaskList(taskList: taskList,),
+                  child: TaskList(),
               ),
             ),
           ],
@@ -76,13 +70,7 @@ class _HomeState extends State<Home> {
               backgroundColor: Colors.transparent,
               context: context,
               builder: (context) {
-                return AddTask(
-                    (newTaskName){
-                      setState(() {
-                        taskList.add(Task(taskName: newTaskName));
-                      });
-                    }
-                );
+                return AddTask();
               },
             );
           }),

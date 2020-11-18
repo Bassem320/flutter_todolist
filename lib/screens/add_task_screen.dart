@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todolist/models/task_list_data.dart';
+import 'package:provider/provider.dart';
 
 var newTaskName;
 
 class AddTask extends StatelessWidget {
 
-  final Function addTaskCallBack;
-  AddTask(this.addTaskCallBack);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +44,7 @@ class AddTask extends StatelessWidget {
           ),
           FlatButton(
             onPressed: () {
-              addTaskCallBack(newTaskName);
+              Provider.of<TaskListData>(context,listen: false).addTask(newTaskName);
               Navigator.pop(context);
             },
             color: Colors.lightBlueAccent,
